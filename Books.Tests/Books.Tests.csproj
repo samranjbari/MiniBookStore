@@ -65,9 +65,9 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Book.Web\Book.Web.csproj">
+    <ProjectReference Include="..\Book.Web\Books.csproj">
       <Project>{94F96877-022C-412D-9F54-A2D61B2D0FDF}</Project>
-      <Name>Book.Web</Name>
+      <Name>Books</Name>
     </ProjectReference>
     <ProjectReference Include="..\Books.Data\Books.Data.csproj">
       <Project>{2241E249-2EDC-4800-BC4D-431636955CB8}</Project>
