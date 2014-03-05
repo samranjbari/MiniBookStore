@@ -22,7 +22,7 @@ namespace Books.Tests.Controllers
             ViewResult result = controller.Index() as ViewResult;
 
             // Assert
-            Assert.AreEqual("", result.ViewBag.Message);
+            Assert.AreEqual(null, result.ViewBag.Message);
         }
 
         [TestMethod]
