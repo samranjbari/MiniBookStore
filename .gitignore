@@ -5,3 +5,6 @@ Books.Tests/obj
 Books/bin/
 Books/obj/
 packages/
+Book.Web/bin/
+Book.Web/obj/
+TestResults/

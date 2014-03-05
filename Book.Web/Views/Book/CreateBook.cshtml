@@ -1,0 +1,186 @@
+﻿@{
+    ViewBag.Title = "Manage Books";
+}
+
+<div ng-controller="BookController">
+    
+<div class="column-right">
+    <h1 class="orng">
+        Manage Books</h1>
+
+    <div class="content-md">
+        <div class="contents-sd">
+            <fieldset>
+                <input type="search" ng-model="search" class="search-query" placeholder="Search">
+                <div style="height:250px;overflow:auto; width: 100%">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="grid">
+                    <tr>
+                        <th style="width: 200px">
+                            Title
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                        <th>
+                            Gumroad Url
+                        </th>
+                        <th>
+                            &nbsp;
+                        </th>
+                        <th>
+                            &nbsp;
+                        </th>
+                    </tr>
+                    <tr ng-repeat="b in myBooks | filter:search">
+                        <td>
+                            <a href="#">{{b.title}}</a>
+                        </td>
+                        <td>
+                            ${{b.price}}
+                        </td>
+                        <td>
+                            {{b.gumroadUrl}}
+                        </td>
+                        <td>
+                            <button type="button" name="btn" class="btn btn-primary" ng-click="selectProduct(b.id)">Select</button>
+                            <button type="button" name="btndelete" class="btn btn-danger" ng-click="destroyProduct(b.id)">
+                                Delete</button>
+                        </td>
+                        <td>
+                            <button type="button" name="btnF" class="btn" ng-class="{'btn-warning': b.isFeature}" ng-click="featureProduct(b.id, !b.isFeature)">
+                                {{b.featureText}}
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <h1 class="orng">
+        Add a New Book</h1>
+
+    @*<div class="alert alert-error" ng-show="errorMessage" ng-bind-html-unsafe="errorMessage"></div>*@
+    <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)"><h2>{{alert.type | uppercase}}</h2><div class="alert-msg" ng-repeat="msg in alert.msgs">{{msg}}</div></alert>
+
+    @*<div class="content-md">
+        <div class="contents-sd">
+            <fieldset>
+                <dl>
+                    <dt style="width: 170px; margin-top: 10px">
+                        <label style="float: none">
+                            <b>Enter the Amazon Url:</b></label></dt>
+                    <dd>
+                        <input type="text" name="amzUrl" style="width: 400px" ng-model="book.amazonUrl"
+                            ng-change="fetchBookInfo()" />
+                        <a href="#" class="reglink" ng-click="collapseDetails()">This book is not listed on amazon</a>
+                    </dd>
+                </dl>
+            </fieldset>
+        </div>
+    </div>*@
+
+    <form name="bookfrm" novalidate>
+    <div class="content-md" id="moreContent" >
+        <div class="contents-sd">
+            <fieldset>
+                <dl>
+                    <dt>
+                        <label>
+                            Title:</label></dt>
+                    <dd>
+                        <input type="text" name="title" id="title" ng-model="book.title" />
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <label>
+                            Author:</label></dt>
+                    <dd>
+                        <input type="text" name="author" ng-model="book.author" />
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <label>
+                            Category:</label>
+                    </dt>
+                    <dd>
+                        <select ng-model="book.categoryId" ng-options="value.id as value.name for (key, value) in book.categories">
+                        </select>
+                        
+
+                        <a href="#" id="morecategoryLink" style="font-size: 11px; text-decoration: underline" ng-click="showOtherCategory($event)">
+                            Not in the list?</a>
+                        <input type="text" id="categoytText" name="categoytText" ng-model="book.categoryText"
+                            popover="Type in the Category for the book" popover-placement="right" popover-title="New Category"
+                            popover-trigger="focus" style="display: none" />
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <label>
+                            Price:</label></dt>
+                    <dd>
+                        <input type="text" type="number" name="price" readonly="readonly" ng-model="book.price" popover="All Book are Free for Now!"
+                            popover-placement="top" popover-title="Price" popover-trigger="focus" /></dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <label>
+                            Book Description:</label></dt>
+                    <dd >
+                        <textarea name="textarea" id="textarea" ng-model="book.description"></textarea></dd>
+                    <dd>
+                        <div style="padding-left: 40px">
+                            <div class="shelf-cont">
+                                <div class="book-cont">
+                                    <img src="{{book.coverUrl}}"  />
+                                </div>
+                                <div class="clear">
+                                </div>
+                                <div>
+                                    <label>
+                                        Cover:</label>
+                                        <input type="file" name="customImage" ng-model="book.coverUrl" ng-file-select="onCoverSelect($files)" />
+                                </div>
+                            </div>
+                        </div>
+                    </dd>
+                </dl>
+            </fieldset>
+            <div class="yellow">
+                <label class="yel">
+                    Upload Book:
+                </label>
+                <input type="file" ng-file-select="onFileSelect($files)" />
+                <div class="clear">
+                </div>
+            </div>
+            
+            <div class="yellow" ng-show="session.isAdmin">
+                <label class="yel">
+                    Gumroad Url:
+                </label>
+                <input type="text" ng-model="book.gumroadUrl" />
+                <div class="clear">
+                </div>
+            </div>
+
+            <div class="trms-cond">
+                <input type="submit" name="submit" value="Add Book" class="green-button br sp-m"
+                    ng-click="saveBook()" />
+                <a href="#" class="cancel">Cancel</a></div>
+        </div>
+    </div>
+    </form>
+</div>
+</div>
+<div class="clear">
+</div>
+
+@section Scripts{
+<script src="/Scripts/Views/Book/manageBooks.js" type="text/javascript"></script>
+}

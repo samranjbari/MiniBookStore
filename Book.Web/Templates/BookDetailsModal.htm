@@ -1,0 +1,29 @@
+﻿
+<h1>
+    {{items.title}}</h1>
+<div class="content-md">
+    <div class="contents-sd">
+        <div class="book-side">
+            <img ng-src="{{items.coverUrl}}" width="139" height="171" alt="Book" class="book-img" />
+            
+            <rating value="items.rating" max="5" ></rating>{{items.rating}}
+
+            <div class="clear">
+            </div>
+
+       </div>
+        <div class="desc-side">
+            <p class="price">
+                <a ng-href="{{items.gumroadUrl}}" class="gumroad-button">${{items.price}}</a>
+            </p>
+            <p>
+                Author: <strong>{{items.author}}</strong></p>
+            <p>
+                {{items.description}}
+            </p>
+                        
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</div>

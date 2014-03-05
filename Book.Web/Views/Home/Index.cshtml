@@ -1,0 +1,72 @@
+﻿
+<div ng-controller="HomeController">
+    
+    <div ng-show="features.length > 0">
+        <h1>Featured Books of the Day</h1>
+        <div class="shelf-cont">
+        <div ng-repeat="b in features">
+            @*<div class="book-cont">
+                <img ng-src="{{b.coverUrl}}" width="139" height="171" alt="Book Title" ng-click="openDetailWindow(b.id)"
+                    tooltip-html-unsafe="<h4 style='width: 200px'><u>{{b.title}}</u></h4><p>Download Count: <b>{{b.readCount}}</b></p><p>Author: <b>{{b.author}}</b></p><br/><p>{{b.shortDescription}}...</p>"
+                    tooltip-placement="right" />
+            </div>*@
+            <div class="contentItem">
+                <div class="contentItemInner">
+                    <img ng-src="{{b.coverUrl}}" width="139" height="171" alt="Book Title" ng-click="openDetailWindow(b.id)"
+                        tooltip-html-unsafe="<h4 style='width: 200px'><u>{{b.title}}</u></h4><p>Download Count: <b>{{b.readCount}}</b></p><p>Author: <b>{{b.author}}</b></p><br/><p>{{b.shortDescription}}...</p>"
+                        tooltip-placement="right" />
+                    <div style="text-align: center">
+                        <div class="text">
+                            Downloads: <b>{{b.readCount}}</b></div>
+                        <div>
+                            <a ng-href="{{b.gumroadUrl}}" class="gumroad-button">Read Now!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+        </div>
+    </div>
+
+    <div ng-repeat="cat in categories">    
+        <h1>
+            {{cat.name}}</h1>
+        <div class="shelf-cont">
+            <div ng-repeat="book in cat.books">
+                @*<div class="book-cont">
+                    <img ng-src="{{book.coverUrl}}" width="139" height="171" alt="Book Title" id="{{book.id}}"
+                        ng-click="openDetailWindow(book.id)" tooltip-html-unsafe="<h4 style='width: 200px'><u>{{book.title}}</u></h4><p>Download Count: <b>{{book.readCount}}</b></p><p>Author: <b>{{book.author}}</b></p><br/><p>{{book.shortDescription}}...</p>"
+                        tooltip-placement="right" />
+                    <div style="font-size: 11px; padding: 10px 0 0 15px; color: #8a8a8a">
+                        <b>{{book.readCount}}</b> downloads</div>
+                </div>*@
+                <div class="contentItem">
+                    <div class="contentItemInner">
+                        <img ng-src="{{book.coverUrl}}" width="140" height="171" alt="Book Title" id="{{book.id}}"
+                            ng-click="openDetailWindow(book.id)" tooltip-html-unsafe="<h4 style='width: 200px'><u>{{book.title}}</u></h4><p>Download Count: <b>{{book.readCount}}</b></p><p>Author: <b>{{book.author}}</b></p><br/><p>{{book.shortDescription}}...</p>"
+                            tooltip-placement="right" />
+                        <div style="text-align:center">
+                        <div class="text">
+                            Downloads: <b>{{book.readCount}}</b></div>
+                        <div>
+                            <a ng-href="{{book.gumroadUrl}}" class="gumroad-button">Read Now!</a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>    
+    <div class="clear">
+    </div>
+
+</div>
+
+@section Scripts{
+<script src="/Scripts/libs/guidedTour.js" type="text/javascript"></script>
+<script src="/Scripts/Views/Home/Index.js" type="text/javascript"></script>
+}
