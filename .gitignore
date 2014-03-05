@@ -1,0 +1,7 @@
+Books.Data/bin/
+Books.Data/obj
+Books.Tests/bin
+Books.Tests/obj
+Books/bin/
+Books/obj/
+packages/

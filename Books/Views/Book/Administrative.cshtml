@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Administrative";
+}
+
+<div ng-controller="administrativeController as vm">
+    <div class="column-right">
+        <h1 class="orng">
+            Administrative</h1>
+        <div class="content-md">
+            <div class="contents-sd">
+                <fieldset>
+                    <input type="search" ng-model="search" class="search-query" placeholder="Search">
+                    <div style="height: 250px; overflow: auto; width: 100%">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="grid">
+                            <tr>
+                                <th style="width: 200px">
+                                    Category
+                                </th>
+                                <th>
+                                    # of books linked
+                                </th>
+                                <th>
+                                    &nbsp;
+                                </th>
+                            </tr>
+                            <tr ng-repeat="c in vm.categories | filter:search">
+                                <td>
+                                    {{c.name}}
+                                </td>
+                                <td>
+                                    {{c.categoryBooks.length}}
+                                </td>
+                                <td>
+                                    <button type="button" name="btndelete" class="btn btn-danger" ng-click="vm.destroyCategory(c.id)"
+                                        ng-disabled="c.categoryBooks.length>0">
+                                        Delete</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="/Scripts/Views/Book/administrative.js" type="text/javascript"></script>
+}
