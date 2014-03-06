@@ -6,7 +6,7 @@ namespace Books.Controllers
 {
     public class AccountController : Controller
     {
-        public ActionResult LogOn()
+        public ActionResult Logon()
         {
             return View();
         }

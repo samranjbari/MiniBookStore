@@ -1,16 +1,15 @@
 ﻿using System.Web.Mvc;
 using Books.Services;
 using ServiceStack.CacheAccess;
-using ServiceStack.CacheAccess.Providers;
-using ServiceStack.Configuration;
+using ServiceStack.Common.Web;
 using ServiceStack.MiniProfiler;
 using ServiceStack.MiniProfiler.Data;
 using ServiceStack.Mvc;
 using ServiceStack.OrmLite;
+using ServiceStack.Redis;
 using ServiceStack.ServiceInterface;
 using ServiceStack.ServiceInterface.Auth;
 using ServiceStack.WebHost.Endpoints;
-using ServiceStack.Redis;
 
 namespace Books.App_Start
 {
@@ -25,7 +24,8 @@ namespace Books.App_Start
         {
             SetConfig(new EndpointHostConfig
             {
-                ServiceStackHandlerFactoryPath = "api"
+                ServiceStackHandlerFactoryPath = "api",
+                DefaultContentType = ContentType.Json
             });
 
             ServiceStack.Text.JsConfig.EmitCamelCaseNames = true;
@@ -35,8 +35,7 @@ namespace Books.App_Start
             Plugins.Add(new AuthFeature(() => new AuthUserSession(),
                     new IAuthProvider[] 
                     { 
-                        new CredentialsAuthProvider(), 
-                        new TwitterAuthProvider(new AppSettings()) 
+                        new CredentialsAuthProvider()
                     }));
             
             //container.Register<ICacheClient>(new MemoryCacheClient());

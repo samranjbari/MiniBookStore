@@ -27,7 +27,7 @@ var app = angular.module('logonApp', ['restangular', 'ui.bootstrap'])
     app.controller('LogonController', function ($rootScope, $scope, Restangular, $location, notifyService) {
         var apiLogin = Restangular.all('logon');
 
-        $scope.logon = { username: '', password: '', rememberMe: false };
+        $scope.logon = { userName: '', password: '', rememberMe: false };
         $scope.logon.resetPassword = false;
         $scope.logon.email = '';
 
