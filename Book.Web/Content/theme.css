@@ -1365,6 +1365,9 @@ div.contentItemInner {
     border-bottom: 1px solid #989898;
     position: relative;
 }
+div.contentItemInner img {
+    height: 205px;
+}
 div.contentThumb {
     width: 175px;
     height: 175px;
